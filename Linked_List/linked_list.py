@@ -3,7 +3,7 @@ from node import ListNode, DLLNode
 class LinkedList:
     def __init__(self, arr=None):
         if arr:
-            self.root = create_list(arr)
+            self.root = self.create_list(arr)
         else:
             self.root = None
 
@@ -21,14 +21,14 @@ class LinkedList:
         s = ""
         curr = self.root
         while curr:
-            s += curr.value
+            s += str(curr.value)
             curr = curr.next
 
         return s
 
 class DoublyLinkedList:
     def __init__(self, arr=None):
-        self.root = self.create_list(arr) if arr else None
+        self.head, self.tail = self.create_list(arr) if arr else (None, None)
 
     def create_list(self, arr):
         sentinel = curr = DLLNode(arr[0])
@@ -36,7 +36,7 @@ class DoublyLinkedList:
             curr.next = DLLNode(node, None, curr)
             curr = curr.next
 
-        return sentinel
+        return sentinel, curr
 
     def print_list(self):
         if not self.root:
