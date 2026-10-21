@@ -3,23 +3,30 @@ from tree_node import TreeNode
 
 class Tree:
     def __init__(self, arr=None):
+        self.root = TreeNode()
+        if arr:
+            self.root = create_tree(arr) 
 
+    def create_tree(self, arr):
+        if arr[0] == "N":
+            return None
 
-    def create_tree(self, root):
-        counter = 0
-        q = deque(root)
-        start = curr = None
+        index = 1
+        root = TreeNode(int(arr[0]))
+        q = deque([root])
 
         while q:
-            for i in range(pow(2, counter)):
-                node = q.popleft()
-                curr = node
-                if node.left:
-                    curr.left = node.left
-                if node.right:
-                    curr.right = node.right
+            node = q.popleft()
+            if vals[index] != "N":
+                node.left = TreeNode(int(arr[index]))
+                q.append(node.left)
+            index += 1
+            if vals[index] != "N":
+                node.right = TreeNode(int(arr[index]))
+                q.append(node.right)
+            index += 1
 
-            counter += 1
+        return root
 
     def print_tree(self, root):
         counter = 0
